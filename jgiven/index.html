@@ -7,7 +7,7 @@
 		<title>reveal.js</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/theme/solarized.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -24,8 +24,68 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+					<h1><a href="http://jgiven.org/" target="_blank">JGiven</a></h1>
+				</section>
+				<section><h2>How do you arrange your tests?</h2></section>
+				<section><h2>Put everything into the test method</h2>
+					<pre><code class="java">
+@Test
+public void adult_gets_a_beer_in_a_german_bar() {
+	//GIVEN
+	User user = new User();
+	user.setAge(22);
+	Bar bar = new Bar();
+	bar.setCountry(GERMANY);
+
+	//WHEN
+	user.ordersBeerIn(bar);
+
+	//THEN
+	assertThat(user).hasBeer();
+}
+					</code></pre>
+					<aside class="notes">
+						Could get messy with heavy objects. Solution: Builders.</br>
+						A lot of boilerplate code.
+					</aside>
+				</section>
+				<section><h2>Move everything into new methods</h2>
+					<pre><code class="java">
+@Test
+public void adult_gets_a_beer_in_a_german_bar() {
+	givenAdultAndGermanBar();
+
+	whenAdultOrdersBeer();
+
+	thenAdultHasBeer();
+}
+					</code></pre>
+					<aside class="notes">
+						Test class will contain a lot of methods.
+					</aside>
+				</section>
+				<section><h2>Do you know another solution?</h2></section>
+				<section><h2>Both solutions violate the <i>SRP</i>.</h2>
+					<aside class="notes">
+						Test object creation and assertions in the same class.
+					</aside>
+				</section>
+				<section id="fragments"><h2>Solutions?</h2>
+					<p class="fragment">Builders</p>
+					<p class="fragment">Custom assertions</p>
+					<p class="fragment">...?</p>
+				</section>
+				<section>
+					<h2>Would you use a tool that supports</h2>
+					<ul>
+						<li>given, when and then code in seperate classes</li>
+						<li>fluent interface to chain methods</li>
+						<li>support tags and issues</li>
+						<li>creates a report</li>
+						<li>and is also easy to use?</li>
+					</ul>
+				</section>
 			</div>
 		</div>
 
