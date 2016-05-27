@@ -1,3 +1,3 @@
 # slides
 
-[jgiven](https://github.com/ccguyka/slides/jgiven)
+[jgiven](https://ccguyka.github.io/slides/jgiven)
